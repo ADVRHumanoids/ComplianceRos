@@ -1,0 +1,11 @@
+# request field
+int32 nr
+# command = add - publish data of joint number nr
+# command = remove - stop publishing data of joint number nr
+string command
+-----
+# response
+bool success
+string message
+int32[] ids
+

@@ -1,0 +1,115 @@
+#!/usr/bin/env python
+
+import roslib
+roslib.load_manifest('centauro_control')
+#from std_msgs.msg import Float64
+from custom_messages.msg import CustomCmnd
+from sensor_msgs.msg import JointState
+import rospy
+import math
+
+if __name__ == '__main__':
+	rospy.init_node('setActuators')
+
+	#a = JointState()
+	a = CustomCmnd()
+	b = JointState()
+	b.name = ["j_wheel_hip_1",
+			  "j_wheel_hip_2",
+			  "j_wheel_hip_3",
+			  "j_wheel_hip_4",
+
+			  "j_wheel_knee_1",
+			  "j_wheel_knee_2",
+			  "j_wheel_knee_3",
+			  "j_wheel_knee_4",]
+
+
+	rate = rospy.Rate(1000.0)
+	command = rospy.Publisher('/centauro/position_controller/command', CustomCmnd, queue_size=1)
+#!	command = rospy.Publisher('/centauro/position_controller/command', JointState, queue_size=1)
+	wheel_command = rospy.Publisher('/centauro/wheels_controller/command', JointState, queue_size=1)
+	start = rospy.get_rostime()
+
+	while not rospy.is_shutdown():
+		time = rospy.get_rostime()
+		time_sec = time.to_sec() -  start.to_sec()
+		if time_sec < 5:
+			c = 0
+		elif time_sec < 15:
+			c = 0.1*(time_sec - 5)
+		elif time_sec < 20:
+			c = 1
+		elif time_sec < 25:
+			c = 0
+		else:
+			c = 0.5*math.sin(2*math.pi*(0.01*(time_sec - 25)+ 0.002*(time_sec-25)*(time_sec-25)))
+
+
+		a.position = [
+        0.0,				#torso_yaw - 0
+
+        0.0,				#j_arm1_1 - 1
+        0.0,				#j_arm1_2 - 2
+        -0.5,				#j_arm1_3 - 3
+        -1.0,				#j_arm1_4 - 4
+        0.0,				#j_arm1_5 - 5
+        -0.00,				#j_arm1_6 - 6
+        0.0,				#j_arm1_7 - 7
+
+        0.0,                    	#j_arm2_1 - 8
+        0.0,				#j_arm2_2 - 9
+        0.5,				#j_arm2_3 - 10
+        1.0,				#j_arm2_4 - 11
+        0.0,				#j_arm2_5 - 12
+        0.00,				#j_arm2_6 - 13
+        0.0,				#j_arm2_7 - 14
+
+        0.0,                            #hip_y_1 - 15
+        0.0,                            #hip_y_2 - 16
+        0.0,	        		#hip_y_3 - 17
+        0.0,    			#hip_y_4 - 18
+
+        0.0,    			#hip_p_1 - 19
+        0.0,	        		#hip_p_2 - 20
+        0.0,	        		#hip_p_3 - 21
+        0.0,	        		#hip_p_4 - 22
+
+        0.0,	        		#knee_p_1 - 23
+        0.0,	        		#knee_p_2 - 24
+        0.0,	        		#knee_p_3 - 25
+        0.0,       			#knee_p_4 - 26
+
+        0.0,                          #ankle_p_1 - 27
+        0.0,                          #ankle_p_2 - 28
+        0.0,                           #ankle_p_3 - 29
+        0.0,                           #ankle_p_4 - 30
+
+        0.0,                           #ankle_p_1 - 31
+        0.0,                           #ankle_p_2 - 32
+        0.0,                           #ankle_p_3 - 33
+        0.0,                           #ankle_p_4 - 34
+
+        0.0,                           #wheel_1 - 35
+        0.0,                           #wheel_2 - 36
+        0.0,                           #wheel_3 - 37
+        0.0,                           #wheel_4 - 38
+        ]
+
+		b.position = [	2.0*math.sin(0.5*rospy.get_time()),		#"j_wheel_hip_1"
+			  	-1.0*math.sin(0.5*rospy.get_time()),		#"j_wheel_hip_1"
+			  	-2.0*rospy.get_time(),		#"j_wheel_hip_3"
+			  	1.0*rospy.get_time(),		#"j_wheel_hip_4",
+
+			  	-1.0*math.sin(0.5*rospy.get_time()),		#"j_wheel_knee_1",
+			  	2.0*math.sin(0.5*rospy.get_time()),		#"j_wheel_knee_2",
+			  	1.0*rospy.get_time(),		#"j_wheel_knee_3",
+			  	-2.0*rospy.get_time(),]		#"j_wheel_knee_4"
+#		a.header.stamp = time
+		command.publish(a)
+		wheel_command.publish(b)
+		rate.sleep()
+
+
+
+

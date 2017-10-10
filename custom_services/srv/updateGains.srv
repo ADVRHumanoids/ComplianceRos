@@ -1,0 +1,14 @@
+# request field
+float64 a_p
+float64 a_d
+float64 j_p
+float64 j_d
+float64 i
+
+int32 nr
+-----
+# response
+bool success
+string message
+
+

@@ -1,0 +1,8 @@
+# request field
+-----
+# response
+float64 mass
+geometry_msgs/PointStamped position
+bool success
+string message
+

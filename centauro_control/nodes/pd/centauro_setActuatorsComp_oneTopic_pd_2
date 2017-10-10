@@ -1,0 +1,205 @@
+#!/usr/bin/env python
+
+import roslib
+roslib.load_manifest('centauro_control')
+from std_msgs.msg import Float64
+from sensor_msgs.msg import JointState
+import rospy
+import math
+
+if __name__ == '__main__':
+	rospy.init_node('setActuators')
+	
+	a = JointState()
+	a.name = ["hip_y_1",
+			  "hip_y_2",
+			  "hip_y_3",
+			  "hip_y_4",
+			  
+			  "hip_p_1",
+			  "hip_p_2",
+			  "hip_p_3",
+			  "hip_p_4",
+			  
+			  "knee_p_1",
+			  "knee_p_2",
+			  "knee_p_3",
+			  "knee_p_4",
+			  
+			  "torso_yaw",
+			  
+			  "j_arm1_1",
+			  "j_arm1_2",
+			  "j_arm1_3",
+			  "j_arm1_4",
+			  "j_arm1_5",
+			  "j_arm1_6",
+			  "j_arm1_7",
+			  
+			  "j_arm2_1",
+			  "j_arm2_2",
+			  "j_arm2_3",
+			  "j_arm2_4",
+			  "j_arm2_5",
+			  "j_arm2_6",
+			  "j_arm2_7"]
+	
+	b = JointState()
+	b.name = ["j_wheel_hip_1",
+			  "j_wheel_hip_2",
+			  "j_wheel_hip_3",
+			  "j_wheel_hip_4",
+			  
+			  "j_wheel_knee_1",
+			  "j_wheel_knee_2",
+			  "j_wheel_knee_3",
+			  "j_wheel_knee_4",]
+	
+	
+	rate = rospy.Rate(1000.0)
+	command = rospy.Publisher('/centauro/pd_controller/command', JointState, queue_size=1)
+	wheel_command = rospy.Publisher('/centauro/pd_wheels_controller/command', JointState, queue_size=1)
+	start = rospy.get_rostime()
+	pos_1 = [
+        0.,				#torso_yaw - 0 
+
+        0.,				#j_arm1_1 - 1
+        0.,				#j_arm1_2 - 2
+        0.,				#j_arm1_3 - 3
+        0.,				#j_arm1_4 - 4
+        0.,				#j_arm1_5 - 5
+        0.,				#j_arm1_6 - 6
+        0.,				#j_arm1_7 - 7
+
+        0.,				#j_arm2_1 - 8
+        0.,				#j_arm2_2 - 9
+        0.,				#j_arm2_3 - 10
+        0.,				#j_arm2_4 - 11
+        0.,				#j_arm2_5 - 12
+        0.,				#j_arm2_6 - 13
+        0.,				#j_arm2_7 - 14
+
+        0.,     	 	        #hip_y_1 - 15
+        0.,     	 	        #hip_y_2 - 16
+        0.,				#hip_y_3 - 17
+        0.,				#hip_y_4 - 18
+	
+        0.,				#hip_p_1 - 19
+        0.,				#hip_p_2 - 20
+        0.,				#hip_p_3 - 21
+        0.,				#hip_p_4 - 22
+
+        0.,				#knee_p_1 - 23
+        0.,				#knee_p_2 - 24
+        0.,				#knee_p_3 - 25
+        0.,]				#knee_p_4 - 26
+
+	pos_2 = [
+
+        0.,				#torso_yaw - 0
+
+        -0.2,				#j_arm1_1 - 1
+        0.3,				#j_arm1_2 - 2
+        0.5,				#j_arm1_3 - 3
+        1.0,				#j_arm1_4 - 4
+        -0.7,				#j_arm1_5 - 5
+        0.5,				#j_arm1_6 - 6
+        0.5,				#j_arm1_7 - 7
+
+        -0.2,				#j_arm2_1 - 8
+        0.3,				#j_arm2_2 - 9
+        0.5,				#j_arm2_3 - 10
+        1.0,				#j_arm2_4 - 11
+        -0.7,				#j_arm2_5 - 12
+        0.5,				#j_arm2_6 - 13
+        0.5,				#j_arm2_7 - 14
+ 
+        0.8,    		        #hip_y_1 - 15
+        0.8,    		        #hip_y_2 - 16
+        -0.8,				#hip_y_3 - 17
+        -0.8,				#hip_y_4 - 18
+
+        1.,				#hip_p_1 - 19
+        1.,				#hip_p_2 - 20
+        1.,				#hip_p_3 - 21
+        1.,				#hip_p_4 - 22
+
+        -1.,				#knee_p_1 - 23
+        -1.,				#knee_p_2 - 24
+        -1.,				#knee_p_3 - 25
+        -1.,]				#knee_p_4 - 26
+
+ 
+
+	pos_3 = [
+ 	0.,				#torso_yaw - 0
+
+        0.2,				#j_arm1_1 - 1
+        -0.2,				#j_arm1_2 - 2
+        0.5,				#j_arm1_3 - 3
+        0.5,				#j_arm1_4 - 4
+        -0.2,				#j_arm1_5 - 5
+        0.5,				#j_arm1_6 - 6
+        0.5,				#j_arm1_7 - 7
+
+        0.2,				#j_arm2_1 - 8
+        -0.2,				#j_arm2_2 - 9
+        0.5,				#j_arm2_3 - 10
+        0.5,				#j_arm2_4 - 11
+        -0.2,				#j_arm2_5 - 12
+        0.5,				#j_arm2_6 - 13
+        0.5,				#j_arm2_7 - 14
+
+        1.5,            		#hip_y_1 - 15
+        1.5,            		#hip_y_2 - 16
+        -1.5,				#hip_y_3 - 17
+        -1.5,				#hip_y_4 - 18
+
+        0.5,				#hip_p_1 - 19
+        0.5,				#hip_p_2 - 20
+        0.5,				#hip_p_3 - 21
+        0.5,				#hip_p_4 - 22
+
+        -0.5,				#knee_p_1 - 23
+        -0.5,				#knee_p_2 - 24
+        -0.5,				#knee_p_3 - 25
+        -0.5,]				#knee_p_4 - 26
+      
+	b.position = [	0.0*rospy.get_time(),		#"j_wheel_hip_1"
+			  	0.0*rospy.get_time(),		#"j_wheel_hip_1"
+			  	0.0*rospy.get_time(),		#"j_wheel_hip_3"
+			  	0.0*rospy.get_time(),		#"j_wheel_hip_4",
+
+			  	0.0*rospy.get_time(),		#"j_wheel_knee_1",
+			  	0.0*rospy.get_time(),		#"j_wheel_knee_2",
+			  	0.0*rospy.get_time(),		#"j_wheel_knee_3",
+			  	0.0*rospy.get_time(),]		#"j_wheel_knee_4"
+
+	t_1 = 2.
+	t_2 = 2.5
+	t_3 = 5.
+	t_4 = 5.5
+
+	while not rospy.is_shutdown():
+		time = rospy.get_rostime()
+		time_sec = time.to_sec() -  start.to_sec()
+		if time_sec < t_1:
+			a.position = pos_1
+		elif time_sec < t_2:
+			a.position = [(x2 - x1)*(time_sec-t_1)/(t_2-t_1)+x1 for (x1,x2) in zip(pos_1,pos_2)]
+		elif time_sec < t_3:
+			a.position = pos_2
+		elif time_sec < t_4:
+#			pos = [x1 - x2 for (x1, x2) in zip(pos_2, pos_3)]
+			a.position = [(x2 - x1)*(time_sec-t_3)/(t_4-t_3)+x1 for (x1,x2) in zip(pos_2,pos_3)]
+		else:
+			a.position = pos_3
+
+#	
+		command.publish(a)
+		wheel_command.publish(b)
+		rate.sleep()
+	
+	
+	
+	

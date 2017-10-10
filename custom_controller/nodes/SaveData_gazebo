@@ -1,0 +1,48 @@
+#!/usr/bin/env python
+
+import roslib
+roslib.load_manifest('custom_controller')
+from gazebo_msgs.msg import LinkStates
+import rospy
+import os.path
+import datetime
+
+def callback(data):
+	k = 0;	
+#	for i in names:
+	temp = []
+	for i in names:	
+		indx = [j for j in range(len(data.name)) if data.name[j][-len(i):] == i] 
+		temp = [data.pose[indx[0]].position.x, data.pose[indx[0]].position.y, data.pose[indx[0]].position.z]
+
+  		file[k].write("\t".join(str(elem) for elem in temp) + "\n")
+		k = k+1
+	
+
+if __name__ == '__main__':
+	rospy.init_node('saveData_gazebo')
+
+	command_sub = rospy.Subscriber('link_states', LinkStates, callback)
+
+	names = {"arm1_7", "pelvis"}
+		
+	rate = rospy.Rate(1000.0)
+	#check on parameter server the print list, and then take the names
+
+	path = 'gazebo_' + datetime.datetime.now().strftime('%a_%d_%B_%Y__%H_%M_%S')
+	
+	try:
+		os.mkdir(path)
+	except Exception, e:
+		print e
+    
+	filename = [item +'.txt' for item in names]
+
+	file = [open(os.path.join(path, i),'w') for i in filename]
+	
+	while not rospy.is_shutdown():
+		rospy.spin()				
+		rate.sleep()
+		
+	for f in file:
+		f.close()

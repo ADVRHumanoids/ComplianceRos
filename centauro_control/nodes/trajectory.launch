@@ -1,0 +1,7 @@
+<launch>
+
+ <node name="trajectory" pkg="centauro_control" type="collision_avoidance_init">
+   <remap from="position_controller/command" to="position_controller/reference" />
+ </node>
+</launch>
+

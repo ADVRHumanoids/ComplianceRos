@@ -1,0 +1,18 @@
+<library path="lib/libcustom_controller"><!-- Transmission types -->
+    <class name="custom_controller/ActuatorPositionController1" type="custom_controller::ActuatorPositionController1" base_class_type="controller_interface::ControllerBase"><description>
+      Deal with hardware interface specifics when loading a transmission interface from URDF.
+      JointStateInterface specialization.
+    </description></class>
+    <class name="custom_controller/ActuatorPositionController4" type="custom_controller::ActuatorPositionController4" base_class_type="controller_interface::ControllerBase"><description>
+      Deal with hardware interface specifics when loading a transmission interface from URDF.
+      JointStateInterface specialization.
+    </description></class>
+    <class name="custom_controller/ActuatorPositionControllerAll" type="custom_controller::ActuatorPositionControllerAll" base_class_type="controller_interface::ControllerBase"><description>
+      Deal with hardware interface specifics when loading a transmission interface from URDF.
+      JointStateInterface specialization.
+    </description></class>
+    <class name="custom_controller/ActuatorPositionControllerClasses" type="custom_controller::ActuatorPositionControllerClasses" base_class_type="controller_interface::ControllerBase"><description>
+      Deal with hardware interface specifics when loading a transmission interface from URDF.
+      JointStateInterface specialization.
+    </description></class>
+</library>

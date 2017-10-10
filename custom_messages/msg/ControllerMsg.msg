@@ -1,0 +1,11 @@
+# CommnadMsg.msg
+
+Header header
+float64 link_side_position
+float64 link_side_velocity
+float64 motor_side_position
+float64 motor_side_velocity
+float64 link_side_effort
+float64 desired_position
+float64 motor_side_effort
+

@@ -1,0 +1,8 @@
+# request field
+-----
+# response
+bool success
+string message
+string[] joints
+int32[] ids
+

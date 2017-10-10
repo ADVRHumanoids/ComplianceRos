@@ -1,0 +1,60 @@
+#!/usr/bin/env python
+from custom_messages.msg import GroupControllerMsg
+from custom_messages.msg import ControllerMsg
+from custom_messages.msg import CustomCmnd
+from custom_services.srv import updatePrint
+import rospy
+
+class Errors:
+    def __init__(self):
+        self.pub = rospy.Publisher('position_controller/controller_errors', CustomCmnd, queue_size=1)
+        
+        #service_ok = False
+        #while (not rospy.is_shutdown() and not service_ok):
+        #  try:
+        #    print('wait for service: update_print')
+        #    rospy.wait_for_service('position_controller/update_print', 0.5)
+        #    service_ok = True
+        #    print('service found')
+        #  except:
+        #    pass
+        #  rate.sleep()
+        self.ids = [6, 24, 7, 25, 8, 26]
+#        self.update_print_srv = rospy.ServiceProxy('position_controller/update_print', updatePrint)
+#        self.update_print()
+
+        self.sub = rospy.Subscriber("position_controller/reference", CustomCmnd, self.reference_callback)
+        rospy.wait_for_message("position_controller/reference", CustomCmnd)
+        self.sub = rospy.Subscriber("position_controller/debug", GroupControllerMsg, self.debug_callback)
+        self.command = CustomCmnd()
+
+
+#    def update_print(self):
+#        print("update_print")
+#        try:
+#            self.selector = self.update_print_srv(0, 'check')
+#            print(self.selector.ids)
+#        except rospy.ServiceException as exc:
+#            print("Service did not process request: " + str(exc))
+
+    def debug_callback(self, data):
+        self.command.onlineGain1 = [command.motor_side_position - command.desired_position for command in data.controller]
+        self.command.onlineGain2 = [command.link_side_position - reference for command, reference in zip(data.controller, self.link_side_reference)]
+        self.command.position = self.link_side_reference
+        self.publish()
+
+    def reference_callback(self, data):
+        self.link_side_reference = [data.position[i] for i in self.ids]
+
+    def publish(self):
+        self.command.header.stamp = rospy.Time.now()
+        self.pub.publish(self.command)
+
+if __name__ == '__main__':
+	rospy.init_node('controller_errors')
+	rate = rospy.Rate(1000.0)
+        Errors()
+
+	while not rospy.is_shutdown():
+	   rate.sleep()
+
