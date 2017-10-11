@@ -36,8 +36,8 @@ defaults: &gains_ankle_pitch
     j_Kd: 0
     Ki: 0
 
-defaults: &gains_j_wheel
-    a_Kp: 100
+defaults: &gains_j_wheel       
+    a_Kp: 0
     a_Kd: 10
     j_Kp: 0
     j_Kd: 0
@@ -50,9 +50,6 @@ defaults: &gains_wheel_hip
 defaults: &gains_wheel_knee
     Kp: 20
     Kd: 1
-
-defaults: &torque_limit_wheels
-   Torque_limit: 1000
 
 centauro:
 
@@ -96,7 +93,7 @@ centauro:
       - 32
       - 36
     controller_update: 4
-    dof: 42
+    dof: 37
     joint16:
       name: hip_yaw_1
       <<: *gains_yaw_pitch
@@ -157,18 +154,6 @@ centauro:
     joint35:
       name: ankle_yaw_4
       <<: *gains_ankle_yaw
-    joint36:
-      name: j_wheel_1
-      <<: *gains_j_wheel
-    joint37:
-      name: j_wheel_2
-      <<: *gains_j_wheel
-    joint38:
-      name: j_wheel_3
-      <<: *gains_j_wheel
-    joint39:
-      name: j_wheel_4
-      <<: *gains_j_wheel
     joint1:
       name: torso_yaw
       a_Kp: 20000
@@ -274,61 +259,43 @@ centauro:
       j_Kp: 0
       j_Kd: 0
       Ki: 0
-    joint40:
+    joint36:
       name: neck_yaw
       a_Kp: 100
       a_Kd: 5
       j_Kp: 0
       j_Kd: 0
       Ki: 0
-    joint41:
+    joint37:
       name: neck_pitch
       a_Kp: 100
       a_Kd: 5
       j_Kp: 0
       j_Kd: 0
       Ki: 0
-    joint42:
+
+
+  velocity_controller:
+    type: custom_controller/ActuatorVelocityController
+    dof: 5
+    print_data: 1
+    joint1:
+      name: j_wheel_1
+      <<: *gains_j_wheel
+    joint2:
+      name: j_wheel_2
+      <<: *gains_j_wheel
+    joint3:
+      name: j_wheel_3
+      <<: *gains_j_wheel
+    joint4:
+      name: j_wheel_4
+      <<: *gains_j_wheel
+    joint5:
       name: neck_velodyne
-      a_Kp: 100
+      a_Kp: 0
       a_Kd: 5
       j_Kp: 0
       j_Kd: 0
       Ki: 0
 
-  wheels_controller:
-    type: custom_controller/ActuatorPositionController1
-    dof: 8
-    print_data: 1
-    joint1:
-      name: j_wheel_hip_1
-      <<: *gains_wheel_hip
-      <<: *torque_limit_wheels
-    joint2:
-      name: j_wheel_hip_2
-      <<: *gains_wheel_hip
-      <<: *torque_limit_wheels
-    joint3:
-      name: j_wheel_hip_3
-      <<: *gains_wheel_hip
-      <<: *torque_limit_wheels
-    joint4:
-      name: j_wheel_hip_4
-      <<: *gains_wheel_hip
-      <<: *torque_limit_wheels
-    joint5:
-      name: j_wheel_knee_1
-      <<: *gains_wheel_knee
-      <<: *torque_limit_wheels
-    joint6:
-      name: j_wheel_knee_2
-      <<: *gains_wheel_knee
-      <<: *torque_limit_wheels
-    joint7:
-      name: j_wheel_knee_3
-      <<: *gains_wheel_knee
-      <<: *torque_limit_wheels
-    joint8:
-      name: j_wheel_knee_4
-      <<: *gains_wheel_knee
-      <<: *torque_limit_wheels

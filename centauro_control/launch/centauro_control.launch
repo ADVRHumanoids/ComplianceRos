@@ -12,29 +12,30 @@
   <arg name="one_arm" default="false"/>
 
   <arg name="torso" value="$(eval 2 if torso_actuators and not one_arm else 1)"/>
-  <arg name="legs" value="$(eval 40 if leg_actuators and not one_arm else 16)"/>
-  <arg name="arm1" value="$(eval 9 if (arm_actuators and torso_actuators) or one_arm else 2)"/>
-  <arg name="arm2" value="$(eval 16 if (arm_actuators and torso_actuators and not one_arm) else 9)"/>
-  <arg name="head" value="$(eval 43 if (head_actuators and torso_actuators and not one_arm) else 40)"/>
-  <arg name="wheels" value="$(eval 9 if leg_actuators and wheels_actuators and not one_arm else 1)"/>
+  <arg name="legs" value="$(eval 36 if leg_actuators and not one_arm else 16)"/>
+  <arg name="arm1" value="$(eval 9 if  arm_actuators and torso_actuators or one_arm else 2)"/>
+  <arg name="arm2" value="$(eval 16 if arm_actuators and torso_actuators and not one_arm else 9)"/>
+  <arg name="head" value="$(eval 38 if head_actuators and torso_actuators and not one_arm else 36)"/>
 
+  <arg name="wheels" value="$(eval 5 if  leg_actuators and wheels_actuators and not one_arm else 1)"/>
+  <arg name="head_vel" value="$(eval 6 if head_actuators and torso_actuators and not one_arm else 5)"/>
 
-  <arg name="compliance_active" value="$(eval list(set(range(1, 43))-
-                                                   set(range(1, torso)+range(2, arm1)+range(9, arm2)+range(16,legs)+range(40,head))
+  <arg name="compliance_active" value="$(eval list(set(range(1, 38))-
+                                                   set(range(1, torso)+range(2, arm1)+range(9, arm2)+range(16,legs)+range(36,head))
                                                   ))"/>
 
-  <arg name="wheels_active" value="$(eval list(set(range(1, 9))-
-                                               set(range(1,wheels))
+  <arg name="wheels_active" value="$(eval list(set(range(1, 6))-
+                                               set(range(1, wheels)+range(5, head_vel))
                                               ))"/>
 
 
   <rosparam command="delete" param="omit" ns="/centauro/position_controller" />
-  <rosparam command="delete" param="omit" ns="/centauro/wheels_controller" />
+  <rosparam command="delete" param="omit" ns="/centauro/velocity_controller" />
 
   <rosparam param="omit" subst_value="True" ns="/centauro/position_controller">
         $(arg compliance_active)
   </rosparam>
-  <rosparam param="omit" subst_value="True" ns="/centauro/wheels_controller">
+  <rosparam param="omit" subst_value="True" ns="/centauro/velocity_controller">
         $(arg wheels_active)
   </rosparam>
 
@@ -42,5 +43,8 @@
     respawn="true" output="screen" ns="/centauro"
     args="position_controller"/>
 
+  <node name="velocity_controller_spawner" pkg="controller_manager" type="spawner"
+    respawn="true" output="screen" ns="/centauro"
+    args="velocity_controller"/>
 
 </launch>

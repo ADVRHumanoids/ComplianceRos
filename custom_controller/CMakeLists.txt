@@ -151,6 +151,7 @@ add_library(${PROJECT_NAME}
 	src/actuator_position_controller1.cpp include/custom_controller/actuator_position_controller1.h
 	src/actuator_position_controller_all.cpp include/custom_controller/actuator_position_controller_all.h
 	src/actuator_position_controller4.cpp include/custom_controller/actuator_position_controller4.h
+	src/actuator_velocity_controller.cpp include/custom_controller/actuator_velocity_controller.h
 	src/actuator_position_controller_classes.cpp include/custom_controller/actuator_position_controller_classes.h
 	src/controller_utils.cpp include/custom_controller/controller_utils.h
 )	
