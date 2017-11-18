@@ -553,11 +553,12 @@ bool ActuatorPositionControllerClasses::setFeedForwardTorque(
     std_srvs::SetBool::Request& req, std_srvs::SetBool::Response& res)
 {
 
-  std::string enabled = "enabled", disabled = "disabled";
   ff_torque_enabled = req.data;
   res.success = true;
   res.message = "Feedforward torque term was successfully " +
-                (ff_torque_enabled ? enabled : disabled) + "!";
+                (ff_torque_enabled ? std::string("enabled") : std::string("disabled")) + "!";
+
+  return true;
 }
 
 void ActuatorPositionControllerClasses::Actuator::update(

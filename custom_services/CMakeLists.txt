@@ -58,7 +58,7 @@ find_package(catkin REQUIRED
    updatePrint.srv
    getJointNames.srv
    computePayloadEstimate.srv
-
+   jointStateCmnd.srv
  )
 
 ## Generate actions in the 'action' folder

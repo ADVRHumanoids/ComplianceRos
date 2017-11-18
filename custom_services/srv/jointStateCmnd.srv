@@ -1,0 +1,12 @@
+# request field
+
+string position
+float64 velocity
+float64 pos_step
+
+-----
+# response
+bool success
+string message
+
+
