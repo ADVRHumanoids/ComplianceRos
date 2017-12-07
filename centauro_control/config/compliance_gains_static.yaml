@@ -26,24 +26,12 @@ centauro:
     type: custom_controller/ActuatorPositionControllerClasses
     print_data:
       - 2
-      - 3
-      - 4
-      - 5
-      - 6
-      - 7
-      - 8
-      - 16
-      - 20
-      - 24
-      - 28
-      - 32
-      - 36
     controller_update: 4
     dof: 37
     joint16:
       name: hip_yaw_1
-      a_Kp: &a_Kp_hip_yaw 2500
-      a_Kd: &a_Kd_hip_yaw 20
+      a_Kp: &a_Kp_hip_yaw 100
+      a_Kd: &a_Kd_hip_yaw 1
       j_Kp: &j_Kp_hip_yaw 0
       j_Kd: &j_Kd_hip_yaw 0
       Ki: &Ki_hip_yaw 0
@@ -70,8 +58,8 @@ centauro:
       Ki: *Ki_hip_yaw
     joint20:
       name: hip_pitch_1
-      a_Kp: &a_Kp_hip_pitch 2500
-      a_Kd: &a_Kd_hip_pitch 20
+      a_Kp: &a_Kp_hip_pitch 100
+      a_Kd: &a_Kd_hip_pitch 1
       j_Kp: &j_Kp_hip_pitch 0
       j_Kd: &j_Kd_hip_pitch 0
       Ki: &Ki_hip_pitch 0
@@ -98,8 +86,8 @@ centauro:
       Ki: *Ki_hip_pitch
     joint24:
       name: knee_pitch_1
-      a_Kp: &a_Kp_knee_pitch 2500
-      a_Kd: &a_Kd_knee_pitch 20
+      a_Kp: &a_Kp_knee_pitch 100
+      a_Kd: &a_Kd_knee_pitch 1
       j_Kp: &j_Kp_knee_pitch 0
       j_Kd: &j_Kd_knee_pitch 0
       Ki: &Ki_knee_pitch 0
@@ -126,8 +114,8 @@ centauro:
       Ki: *Ki_knee_pitch
     joint28:
       name: ankle_pitch_1
-      a_Kp: &a_Kp_ankle_pitch 2500
-      a_Kd: &a_Kd_ankle_pitch 20
+      a_Kp: &a_Kp_ankle_pitch 100
+      a_Kd: &a_Kd_ankle_pitch 1
       j_Kp: &j_Kp_ankle_pitch 0
       j_Kd: &j_Kd_ankle_pitch 0
       Ki: &Ki_ankle_pitch 0
@@ -154,8 +142,8 @@ centauro:
       Ki: *Ki_ankle_pitch
     joint32:
       name: ankle_yaw_1
-      a_Kp: &a_Kp_ankle_yaw 2500
-      a_Kd: &a_Kd_ankle_yaw 20
+      a_Kp: &a_Kp_ankle_yaw 100
+      a_Kd: &a_Kd_ankle_yaw 1
       j_Kp: &j_Kp_ankle_yaw 0
       j_Kd: &j_Kd_ankle_yaw 0
       Ki: &Ki_ankle_yaw 0
@@ -182,85 +170,85 @@ centauro:
       Ki: *Ki_ankle_yaw
     joint1:
       name: torso_yaw
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 2000
+      a_Kd: 20
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint2:
       name: j_arm1_1
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 500
+      a_Kd: 5
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint3:
       name: j_arm1_2
-      a_Kp: 8000
-      a_Kd: 50
+      a_Kp: 400
+      a_Kd: 4
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint4:
       name: j_arm1_3
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 400
+      a_Kd: 4
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint5:
       name: j_arm1_4
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 400
+      a_Kd: 4
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint6:
       name: j_arm1_5
       a_Kp: 300
-      a_Kd: 5
+      a_Kd: 3
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint7:
       name: j_arm1_6
-      a_Kp: 2000
-      a_Kd: 5
+      a_Kp: 300
+      a_Kd: 3
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint8:
       name: j_arm1_7
-      a_Kp: 300
-      a_Kd: 5
+      a_Kp: 200
+      a_Kd: 2
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint9:
       name: j_arm2_1
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 500
+      a_Kd: 5
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint10:
       name: j_arm2_2
-      a_Kp: 8000
-      a_Kd: 50
+      a_Kp: 400
+      a_Kd: 4
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint11:
       name: j_arm2_3
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 400
+      a_Kd: 4
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint12:
       name: j_arm2_4
-      a_Kp: 5000
-      a_Kd: 30
+      a_Kp: 400
+      a_Kd: 4
       j_Kp: 0
       j_Kd: 0
       Ki: 0
@@ -273,28 +261,28 @@ centauro:
       Ki: 0
     joint14:
       name: j_arm2_6
-      a_Kp: 2000
-      a_Kd: 5
+      a_Kp: 300
+      a_Kd: 3
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint15:
       name: j_arm2_7
-      a_Kp: 300
+      a_Kp: 200
       a_Kd: 2
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint36:
       name: neck_yaw
-      a_Kp: 300
+      a_Kp: 100
       a_Kd: 5
       j_Kp: 0
       j_Kd: 0
       Ki: 0
     joint37:
       name: neck_pitch
-      a_Kp: 300
+      a_Kp: 100
       a_Kd: 5
       j_Kp: 0
       j_Kd: 0
