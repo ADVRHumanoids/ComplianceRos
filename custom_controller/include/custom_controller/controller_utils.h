@@ -53,7 +53,7 @@ public:
 
     for (int i = 0; i < dofs; i++)
     {
-      if (id[i] != NON_EXISTING)
+      if (id[i] != NON_EXISTING && id[i] < q_urdf.size())
         q_mapped[i] = q_urdf[id[i]];
     }
   }
@@ -74,7 +74,7 @@ public:
 
     for (int i = 0; i < dofs; i++)
     {
-      if (id[i] != NON_EXISTING)
+      if (id[i] != NON_EXISTING && id[i] < q_urdf.size())
         q_urdf[id[i]] = q_controller[i];
     }
   }
