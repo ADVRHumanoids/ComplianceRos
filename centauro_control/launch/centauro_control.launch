@@ -15,12 +15,12 @@
 
   <arg name="torso" value="$(eval 2 if torso_actuators else 1)"/>
   <arg name="legs" value="$(eval 36 if leg_actuators else 16)"/>
-  <arg name="arm1" value="$(eval 9 if  left_arm_actuators and torso_actuators else 2)"/>
-  <arg name="arm2" value="$(eval 16 if right_arm_actuators and torso_actuators else 9)"/>
-  <arg name="head" value="$(eval 38 if head_actuators and torso_actuators else 36)"/>
+  <arg name="arm1" value="$(eval 9 if  left_arm_actuators else 2)"/>
+  <arg name="arm2" value="$(eval 16 if right_arm_actuators else 9)"/>
+  <arg name="head" value="$(eval 38 if head_actuators else 36)"/>
 
-  <arg name="wheels" value="$(eval 5 if  leg_actuators and wheels_actuators else 1)"/>
-  <arg name="head_vel" value="$(eval 6 if head_actuators and torso_actuators else 5)"/>
+  <arg name="wheels" value="$(eval 5 if  wheels_actuators else 1)"/>
+  <arg name="head_vel" value="$(eval 6 if head_actuators else 5)"/>
 
   <arg name="compliance_active" value="$(eval list(set(range(1, 38))-
                                                    set(range(1, torso)+range(2, arm1)+range(9, arm2)+range(16,legs)+range(36,head))
