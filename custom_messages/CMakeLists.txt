@@ -55,6 +55,7 @@ find_package(catkin REQUIRED
    ControllerMsg.msg
    GroupJointControllerStateMsg.msg
    GroupControllerMsg.msg
+   StateMsg.msg
 )
 ## Generate services in the 'srv' folder
 # add_service_files(

@@ -21,7 +21,7 @@ ENDFUNCTION()
 LIST( APPEND PYTHON_INSTALL colliding_forearms collision_avoidance_init mammal_like moving_arms moving_arms_varying_frequencies new_mammal_like raise_rear_leg spider spider_2 standing_position velocity_mammal_like wheels zero )
 prepend_paths(PYTHON_INSTALL compliance)
 
-LIST( APPEND PYTHON_INSTALL collision_test computeErrors )
+LIST( APPEND PYTHON_INSTALL collision_test computeErrors log_data)
 
 catkin_package(
  INCLUDE_DIRS nodes
