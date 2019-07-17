@@ -1,0 +1,338 @@
+centauro:
+
+# controller_namespace:
+#   type: custom_controller/ActuatorPositionController4 #(required)
+#   dof: number of controlled joints #(required)
+#     print_data: #(optional)
+#        - first published joint
+#        - second published joint
+#        -
+#        - nth published joint
+#   joint{jointnumber} (ex. joint1, joint2): #(required)
+#     name: joint name in urdf #(required)
+#     a_Kp: controller actuator proportional gain #(required)
+#     a_Kd: controller actuator derivative gain #(required)
+#     j_Kp: controller joint proportional gain #(required)
+#     j_Kd: controller joint derivative gain #(required)
+#     Ki: controller integral gain #(required)
+#     Ks: spring stiffness #(required)
+#     D: spring damping #(required)
+#     Bm: motor inertia #(required)
+#     phim: motor damping #(required)
+#     nu: gear ration #(required)
+#     Torque_limit: maximum motor torque #(required)
+
+  position_controller:
+    type: custom_controller/ActuatorPositionControllerClasses
+    print_data:
+      - 28
+      - 29
+      - 30
+      - 31
+    controller_update: 4
+    dof: 37
+    joint16:
+      name: hip_yaw_1
+      a_Kp: &a_Kp_hip_yaw 400
+      a_Kd: &a_Kd_hip_yaw 10
+      j_Kp: &j_Kp_hip_yaw 0
+      j_Kd: &j_Kd_hip_yaw 0
+      Ki: &Ki_hip_yaw 0
+    joint17:
+      name: hip_yaw_2
+      a_Kp: *a_Kp_hip_yaw
+      a_Kd: *a_Kd_hip_yaw
+      j_Kp: *j_Kp_hip_yaw
+      j_Kd: *j_Kd_hip_yaw
+      Ki: *Ki_hip_yaw
+    joint18:
+      name: hip_yaw_3
+      a_Kp: *a_Kp_hip_yaw
+      a_Kd: *a_Kd_hip_yaw
+      j_Kp: *j_Kp_hip_yaw
+      j_Kd: *j_Kd_hip_yaw
+      Ki: *Ki_hip_yaw
+    joint19:
+      name: hip_yaw_4
+      a_Kp: *a_Kp_hip_yaw
+      a_Kd: *a_Kd_hip_yaw
+      j_Kp: *j_Kp_hip_yaw
+      j_Kd: *j_Kd_hip_yaw
+      Ki: *Ki_hip_yaw
+    joint20:
+      name: hip_pitch_1
+      a_Kp: &a_Kp_hip_pitch 500
+      a_Kd: &a_Kd_hip_pitch 25
+      j_Kp: &j_Kp_hip_pitch 0
+      j_Kd: &j_Kd_hip_pitch 0
+      Ki: &Ki_hip_pitch 0
+    joint21:
+      name: hip_pitch_2
+      a_Kp: *a_Kp_hip_pitch
+      a_Kd: *a_Kd_hip_pitch
+      j_Kp: *j_Kp_hip_pitch
+      j_Kd: *j_Kd_hip_pitch
+      Ki: *Ki_hip_pitch
+    joint22:
+      name: hip_pitch_3
+      a_Kp: *a_Kp_hip_pitch
+      a_Kd: *a_Kd_hip_pitch
+      j_Kp: *j_Kp_hip_pitch
+      j_Kd: *j_Kd_hip_pitch
+      Ki: *Ki_hip_pitch
+    joint23:
+      name: hip_pitch_4
+      a_Kp: *a_Kp_hip_pitch
+      a_Kd: *a_Kd_hip_pitch
+      j_Kp: *j_Kp_hip_pitch
+      j_Kd: *j_Kd_hip_pitch
+      Ki: *Ki_hip_pitch
+    joint24:
+      name: knee_pitch_1
+      a_Kp: &a_Kp_knee_pitch 200
+      a_Kd: &a_Kd_knee_pitch 10
+      j_Kp: &j_Kp_knee_pitch 0
+      j_Kd: &j_Kd_knee_pitch 0
+      Ki: &Ki_knee_pitch 0
+    joint25:
+      name: knee_pitch_2
+      a_Kp: *a_Kp_knee_pitch
+      a_Kd: *a_Kd_knee_pitch
+      j_Kp: *j_Kp_knee_pitch
+      j_Kd: *j_Kd_knee_pitch
+      Ki: *Ki_knee_pitch
+    joint26:
+      name: knee_pitch_3
+      a_Kp: *a_Kp_knee_pitch
+      a_Kd: *a_Kd_knee_pitch
+      j_Kp: *j_Kp_knee_pitch
+      j_Kd: *j_Kd_knee_pitch
+      Ki: *Ki_knee_pitch
+    joint27:
+      name: knee_pitch_4
+      a_Kp: *a_Kp_knee_pitch
+      a_Kd: *a_Kd_knee_pitch
+      j_Kp: *j_Kp_knee_pitch
+      j_Kd: *j_Kd_knee_pitch
+      Ki: *Ki_knee_pitch
+    joint28:
+      name: ankle_pitch_1
+      a_Kp: &a_Kp_ankle_pitch 500
+      a_Kd: &a_Kd_ankle_pitch 25
+      j_Kp: &j_Kp_ankle_pitch 0
+      j_Kd: &j_Kd_ankle_pitch 0
+      Ki: &Ki_ankle_pitch 0
+    joint29:
+      name: ankle_pitch_2
+      a_Kp: *a_Kp_ankle_pitch
+      a_Kd: *a_Kd_ankle_pitch
+      j_Kp: *j_Kp_ankle_pitch
+      j_Kd: *j_Kd_ankle_pitch
+      Ki: *Ki_ankle_pitch
+    joint30:
+      name: ankle_pitch_3
+      a_Kp: *a_Kp_ankle_pitch
+      a_Kd: *a_Kd_ankle_pitch
+      j_Kp: *j_Kp_ankle_pitch
+      j_Kd: *j_Kd_ankle_pitch
+      Ki: *Ki_ankle_pitch
+    joint31:
+      name: ankle_pitch_4
+      a_Kp: *a_Kp_ankle_pitch
+      a_Kd: *a_Kd_ankle_pitch
+      j_Kp: *j_Kp_ankle_pitch
+      j_Kd: *j_Kd_ankle_pitch
+      Ki: *Ki_ankle_pitch
+    joint32:
+      name: ankle_yaw_1
+      a_Kp: &a_Kp_ankle_yaw 425
+      a_Kd: &a_Kd_ankle_yaw 10
+      j_Kp: &j_Kp_ankle_yaw 0
+      j_Kd: &j_Kd_ankle_yaw 0
+      Ki: &Ki_ankle_yaw 0
+    joint33:
+      name: ankle_yaw_2
+      a_Kp: *a_Kp_ankle_yaw
+      a_Kd: *a_Kd_ankle_yaw
+      j_Kp: *j_Kp_ankle_yaw
+      j_Kd: *j_Kd_ankle_yaw
+      Ki: *Ki_ankle_yaw
+    joint34:
+      name: ankle_yaw_3
+      a_Kp: *a_Kp_ankle_yaw
+      a_Kd: *a_Kd_ankle_yaw
+      j_Kp: *j_Kp_ankle_yaw
+      j_Kd: *j_Kd_ankle_yaw
+      Ki: *Ki_ankle_yaw
+    joint35:
+      name: ankle_yaw_4
+      a_Kp: *a_Kp_ankle_yaw
+      a_Kd: *a_Kd_ankle_yaw
+      j_Kp: *j_Kp_ankle_yaw
+      j_Kd: *j_Kd_ankle_yaw
+      Ki: *Ki_ankle_yaw
+    joint1:
+      name: torso_yaw
+      a_Kp: 2000
+      a_Kd: 20
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint2:
+      name: j_arm1_1
+      a_Kp: 500
+      a_Kd: 5
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint3:
+      name: j_arm1_2
+      a_Kp: 400
+      a_Kd: 4
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint4:
+      name: j_arm1_3
+      a_Kp: 400
+      a_Kd: 4
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint5:
+      name: j_arm1_4
+      a_Kp: 400
+      a_Kd: 4
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint6:
+      name: j_arm1_5
+      a_Kp: 300
+      a_Kd: 3
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint7:
+      name: j_arm1_6
+      a_Kp: 300
+      a_Kd: 3
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint8:
+      name: j_arm1_7
+      a_Kp: 200
+      a_Kd: 2
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint9:
+      name: j_arm2_1
+      a_Kp: 500
+      a_Kd: 5
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint10:
+      name: j_arm2_2
+      a_Kp: 400
+      a_Kd: 4
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint11:
+      name: j_arm2_3
+      a_Kp: 400
+      a_Kd: 4
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint12:
+      name: j_arm2_4
+      a_Kp: 400
+      a_Kd: 4
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint13:
+      name: j_arm2_5
+      a_Kp: 300
+      a_Kd: 3
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint14:
+      name: j_arm2_6
+      a_Kp: 300
+      a_Kd: 3
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint15:
+      name: j_arm2_7
+      a_Kp: 200
+      a_Kd: 2
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint36:
+      name: neck_yaw
+      a_Kp: 100
+      a_Kd: 5
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+    joint37:
+      name: neck_pitch
+      a_Kp: 100
+      a_Kd: 5
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+
+
+  velocity_controller:
+    type: custom_controller/ActuatorVelocityController
+    dof: 5
+    print_data: 
+        - 1
+        - 2
+        - 3
+        - 4
+    joint1:
+      name: j_wheel_1
+      a_Kp: &a_Kp_j_wheel 0
+      a_Kd: &a_Kd_j_wheel 35
+      j_Kp: &j_Kp_j_wheel 0
+      j_Kd: &j_Kd_j_wheel 0
+      Ki: &Ki_j_wheel 0
+    joint2:
+      name: j_wheel_2
+      a_Kp: *a_Kp_j_wheel
+      a_Kd: *a_Kd_j_wheel
+      j_Kp: *j_Kp_j_wheel
+      j_Kd: *j_Kd_j_wheel
+      Ki: *Ki_j_wheel
+    joint3:
+      name: j_wheel_3
+      a_Kp: *a_Kp_j_wheel
+      a_Kd: *a_Kd_j_wheel
+      j_Kp: *j_Kp_j_wheel
+      j_Kd: *j_Kd_j_wheel
+      Ki: *Ki_j_wheel
+    joint4:
+      name: j_wheel_4
+      a_Kp: *a_Kp_j_wheel
+      a_Kd: *a_Kd_j_wheel
+      j_Kp: *j_Kp_j_wheel
+      j_Kd: *j_Kd_j_wheel
+      Ki: *Ki_j_wheel
+    joint5:
+      name: neck_velodyne
+      a_Kp: 0
+      a_Kd: 5
+      j_Kp: 0
+      j_Kd: 0
+      Ki: 0
+

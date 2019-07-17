@@ -93,6 +93,9 @@
 #include "custom_messages/GroupControllerMsg.h"
 #include "custom_messages/CustomCmnd.h"
 #include <std_srvs/SetBool.h>
+#include <numeric>
+		
+
 
 namespace custom_controller
 {

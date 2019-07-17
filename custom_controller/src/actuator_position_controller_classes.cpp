@@ -110,13 +110,12 @@ bool ActuatorPositionControllerClasses::updateGains(
 {
   std::stringstream msg;
 
-  if (req.nr < 0 || req.nr > dof - 1)
+  int called_dof = _reversed_selector[req.nr];
+  if (called_dof < 0 || called_dof > dof - 1)
   {
     res.success = false;
     msg << "Received number: " << req.nr
-        << " is not defined within the controller. Please send a number "
-           "bettween 0 and " << dof - 1 << "." << std::endl
-        << "To see loaded joints call 'get_joint_names' service.";
+        << " is not defined within the controller. To see loaded joints call 'get_joint_names' service.";
     res.message = msg.str();
     return true;
   }
@@ -124,7 +123,7 @@ bool ActuatorPositionControllerClasses::updateGains(
   res.success = true;
 
   if (req.a_p >= 0)
-    _controllers.at(req.nr).a_Kp = req.a_p;
+    _controllers.at(called_dof).a_Kp = req.a_p;
   else
   {
     msg << "Given actuator proportional gain is negative. Please give a "
@@ -134,7 +133,7 @@ bool ActuatorPositionControllerClasses::updateGains(
   }
 
   if (req.a_d >= 0)
-    _controllers.at(req.nr).a_Kd = req.a_d;
+    _controllers.at(called_dof).a_Kd = req.a_d;
   else
   {
     msg << "Given actuator derivative gain is negative. Please give a "
@@ -144,7 +143,7 @@ bool ActuatorPositionControllerClasses::updateGains(
   }
 
   if (req.j_p >= 0)
-    _controllers.at(req.nr).j_Kp = req.j_p;
+    _controllers.at(called_dof).j_Kp = req.j_p;
   else
   {
     msg << "Given joint proportional gain is negative. Please give a "
@@ -154,7 +153,7 @@ bool ActuatorPositionControllerClasses::updateGains(
   }
 
   if (req.j_d >= 0)
-    _controllers.at(req.nr).j_Kd = req.j_d;
+    _controllers.at(called_dof).j_Kd = req.j_d;
   else
   {
     msg << "Given joint derivative gain is negative. Please give a positive "
@@ -163,7 +162,7 @@ bool ActuatorPositionControllerClasses::updateGains(
     res.success = false;
   }
   if (req.i >= 0)
-    _controllers.at(req.nr).Ki = req.i;
+    _controllers.at(called_dof).Ki = req.i;
   else
   {
     msg << "Given integral gain is negative. Please give a positive number."
@@ -173,14 +172,14 @@ bool ActuatorPositionControllerClasses::updateGains(
   }
 
   msg << "Changed controller gains for" << std::endl
-      << "joint number: " << req.nr << std::endl
-      << "joint name: " << _links.at(req.nr).name << "." << std::endl
+      << "joint number: " << called_dof << std::endl
+      << "joint name: " << _links.at(called_dof).name << "." << std::endl
       << "Current gains are: " << std::endl
-      << "a_Kp: " << _controllers.at(req.nr).a_Kp << std::endl
-      << "a_Kd: " << _controllers.at(req.nr).a_Kd << std::endl
-      << "j_Kp: " << _controllers.at(req.nr).j_Kp << std::endl
-      << "j_Kd: " << _controllers.at(req.nr).j_Kd << std::endl
-      << "Ki: " << _controllers.at(req.nr).Ki << std::endl;
+      << "a_Kp: " << _controllers.at(called_dof).a_Kp << std::endl
+      << "a_Kd: " << _controllers.at(called_dof).a_Kd << std::endl
+      << "j_Kp: " << _controllers.at(called_dof).j_Kp << std::endl
+      << "j_Kd: " << _controllers.at(called_dof).j_Kd << std::endl
+      << "Ki: " << _controllers.at(called_dof).Ki << std::endl;
   res.message = msg.str();
   return true;
 }

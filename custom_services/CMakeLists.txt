@@ -59,6 +59,7 @@ find_package(catkin REQUIRED
    getJointNames.srv
    computePayloadEstimate.srv
    jointStateCmnd.srv
+   loadGains.srv
  )
 
 ## Generate actions in the 'action' folder
