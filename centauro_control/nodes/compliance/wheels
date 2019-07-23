@@ -24,10 +24,10 @@ if __name__ == '__main__':
 		time = rospy.get_rostime()
 		time_sec = time.to_sec() -  start.to_sec()
 
-		b.velocity = [  0.0,		#"j_wheel_1"
-			  	-0.0,		#"j_wheel_1"
-			  	0.0,		#"j_wheel_3"
-			  	-0.0,		#"j_wheel_4",
+		b.velocity = [  1.0,		#"j_wheel_1"
+			  	-1.0,		#"j_wheel_2"
+			  	1.0,		#"j_wheel_3"
+			  	-1.0,		#"j_wheel_4",
                                 0.5
                 ]
 		#"j_wheel_knee_4"

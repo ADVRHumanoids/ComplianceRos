@@ -18,7 +18,9 @@ FUNCTION( prepend_paths SOURCE_FILES PARENT_DIR)
   SET( ${SOURCE_FILES} ${MODIFIED} PARENT_SCOPE )
 ENDFUNCTION()
 
-LIST( APPEND PYTHON_INSTALL colliding_forearms collision_avoidance_init mammal_like moving_arms moving_arms_varying_frequencies new_mammal_like raise_rear_leg spider spider_2 standing_position velocity_mammal_like wheels zero )
+#LIST( APPEND PYTHON_INSTALL colliding_forearms collision_avoidance_init mammal_like moving_arms moving_arms_varying_frequencies new_mammal_like raise_rear_leg spider spider_2 standing_position velocity_mammal_like wheels zero )
+#prepend_paths(PYTHON_INSTALL compliance)
+LIST( APPEND PYTHON_INSTALL wheels zero mammal_1 mammal_2 mammal_3 spider)
 prepend_paths(PYTHON_INSTALL compliance)
 
 LIST( APPEND PYTHON_INSTALL collision_test computeErrors log_data)

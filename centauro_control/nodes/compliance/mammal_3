@@ -1,0 +1,76 @@
+#!/usr/bin/env python
+
+import roslib
+roslib.load_manifest('centauro_control')
+#from std_msgs.msg import Float64
+from custom_messages.msg import CustomCmnd
+from sensor_msgs.msg import JointState
+import rospy
+import math
+
+if __name__ == '__main__':
+	rospy.init_node('setActuators')
+
+	a = CustomCmnd()
+
+
+	rate = rospy.Rate(1000.0)
+	command = rospy.Publisher('/centauro/position_controller/command', CustomCmnd, queue_size=1)
+	start = rospy.get_rostime()
+
+	while not rospy.is_shutdown():
+
+		a.position = [
+        -0.0,			#torso_yaw - 0
+
+        0.5,			#j_arm1_1 - 1
+        0.3,		#j_arm1_2 - 2
+        0.8,		#j_arm1_3 - 3
+        -1.8,		#j_arm1_4 - 4
+        0.0,			#j_arm1_5 - 5
+        -0.8,		#j_arm1_6 - 6
+        0.0,			#j_arm1_7 - 7
+
+        0.5,			#j_arm2_1 - 8
+        -0.3,			#j_arm2_2 - 9
+        -0.8,			#j_arm2_3 - 10
+        -1.8,			#j_arm2_4 - 11
+        0.0,			#j_arm2_5 - 12
+        -0.8,			#j_arm2_6 - 13
+        0.0,			#j_arm2_7 - 14
+
+        -0.3,                    #hip_y_1 - 15
+        0.3,                    #hip_y_2 - 16
+        0.3,			#hip_y_3 - 17
+        -0.3,			#hip_y_4 - 18
+
+
+        -1.57,			#hip_p_1 - 19
+         1.57,			#hip_p_2 - 20
+         1.57,			#hip_p_3 - 21
+        -1.57,			#hip_p_4 - 22
+
+        -1.37,			#knee_p_1 - 23
+         1.37,			#knee_p_2 - 24
+         1.37,			#knee_p_3 - 25
+        -1.37,			#knee_p_4 - 26
+
+         0.20,                  #ankle_p_1 - 27
+        -0.20,                  #ankle_p_2 - 28
+        -0.20,                  #ankle_p_3 - 29
+         0.20,                  #ankle_p_4 - 30
+
+         0.3,                   #ankle_y_1 - 31
+        -0.3,                   #ankle_y_2 - 32
+        -0.3,                    #ankle_y_3 - 33
+         0.3,                   #ankle_y_4 - 34
+
+        ]
+
+
+		command.publish(a)
+		rate.sleep()
+
+
+
+
